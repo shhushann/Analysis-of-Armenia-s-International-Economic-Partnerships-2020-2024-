@@ -1,0 +1,365 @@
+---
+title: "Analysis of the RA’s International Economic Partnership"
+author: "Group 7 - Albert Simonyan, Anna Minasyan, Lilit Asminian, Shushan Gevorgyan"
+date: "12/06/2024"
+output:
+  word_document:
+    toc: true
+    toc_depth: '2'
+  pdf_document:
+    toc: true
+    toc_depth: 2
+editor_options:
+  markdown:
+    wrap: sentence
+always_allow_html: true
+---
+
+\newpage
+
+# Abstract
+
+This paper examines the evolution of Armenia’s international economic partnerships between 2020 and 2024, analyzing the extent to which these partnerships have diversified and intensified.
+The study also explores the role of Armenian citizens in influencing the country’s international economic relations.
+Through the use of key datasets, the research identifies patterns and interactions between foreign investments, dollarization, remittance flows, external trade, and gross external debt.
+The findings aim to highlight Armenia's progress in expanding its global economic footprint while assessing the contributions of individual citizens to this growth.
+
+**Keywords:** Armenia, economic growth, international partnerships, dollarization, remittances.
+
+# Introduction
+
+Armenia’s economy has undergone substantial changes from 2020 to 2024, driven by shifts in international partnerships, economic diversification, and geopolitical influences.
+This paper provides an in-depth analysis of key economic indicators, including foreign investments, dollarization levels, remittances, external trade, and gross external debt.
+By examining these factors, the study aims to uncover the hidden dynamics underlying Armenia’s economic transformation.
+
+Armenia’s interactions with key international partners such as the EU, Russia, and China have played a critical role in shaping its economic stability and resilience.
+This research contributes to understanding how these partnerships evolved during this period and evaluates the significant role of Armenian citizens in shaping these economic relationships.
+
+# Motivation
+
+Armenia’s evolving international partnerships between 2020 and 2024 have been shaped by complex political, social, and economic dynamics.
+These shifts have led to a noticeable diversification and intensification in collaborations with key global partners.
+Understanding the underlying patterns driving these changes is essential for assessing their long-term implications on Armenia’s economic resilience and growth.
+By exploring these trends, this study aims to shed light on the factors that influence the country’s position in the global economic landscape and inform future strategies for sustainable development.
+
+# Literature Review
+
+The economic growth of Armenia from 2020 to 2024 has been significantly influenced by key variables such as foreign investments, dollarization, remittance flows, external trade, and gross external debt.
+Before analyzing Armenia-specific data, global and regional research was reviewed to contextualize these dynamics.
+
+Reports from the Central Bank of Armenia (CBA) and the Statistical Committee of Armenia provide essential baseline data, highlighting trends in dollarization, trade balances, and remittance inflows.
+For instance, dollarization levels have been a key focus of the International Monetary Fund (IMF), which explores how reliance on foreign currency impacts Armenia's financial stability.
+This aligns with global studies on the effects of dollarization in emerging markets, emphasizing its dual role in mitigating risks and exposing economies to exchange rate vulnerabilities.
+
+Studies on remittance economies, particularly from the World Bank, offer insights into the significance of remittance flows in shaping household consumption and national economic stability in Armenia.
+Comparative research from neighboring countries like Georgia underscores how remittances bolster resilience during economic shocks, a pattern similarly observed in Armenia.
+
+The Comprehensive and Enhanced Partnership Agreement (CEPA) between Armenia and the European Union (EU) is another critical focus area.
+The European External Action Service (EEAS) and related EU reports illustrate how CEPA has strengthened Armenia’s trade relations with the EU, driving over \$2 billion in trade exchanges by 2023.
+Concurrently, Armenia’s deepening economic ties with Russia and the Eurasian Economic Union (EAEU) have sustained its trade balance, with bilateral trade volumes reaching record highs in recent years.
+
+Lastly, UNCTAD's reports on foreign direct investment (FDI) trends in Armenia shed light on the interplay between international partnerships and economic development.
+These findings provide a foundation for assessing how strategic investments contribute to growth and stability.
+By synthesizing information from these sources, this literature review builds a comprehensive picture of Armenia’s economic trajectory, paving the way for an in-depth analysis of its financial stability and resilience from 2020 to 2024.
+
+# Data Overview and Description
+
+-   **Balance of Payments of Armenia**\
+    This dataset details Armenia's financial transactions with non-residents, including imports, exports, remittances, and foreign direct investments.
+
+-   **Dollarization Level of Armenia**\
+    This dataset tracks Armenia's dependence on foreign currencies such as the US dollar in deposits, loans, and economic transactions.
+
+-   **Gross External Debt**\
+    This dataset records Armenia's external debt liabilities, categorized into public and private debt, as well as short- and long-term obligations.
+
+-   **International Tourism in Armenia**\
+    This dataset provides insight into Armenia's tourism sector, including metrics such as the visitors that are tourists, and the outbounds that are tourists.
+
+-   **Turnover Volumes of Investment Companies and Banks**\
+    This dataset details financial activity in Armenia’s investment companies and banks.
+
+-   **Foreign Investments in Armenia**\
+    This dataset tracks foreign investment flows into Armenia, categorized by type of investment such as foreign direct investment (FDI) and portfolio investments, as well as the source countries.
+
+-   **Industries of RA**\
+    This dataset provides data on the performance of Armenia’s industrial sectors, including metrics such as production volume, export levels, and contributions to GDP.
+
+# Hypotheses
+
+1.  To what extent have Armenia’s international economic partnerships diversified and intensified between 2020 and 2024?
+2.  Do citizens of Armenia play a significant role in shaping and influencing the country’s global economic relations?
+
+\newpage
+
+# Methods
+
+The study utilizes:
+
+-   **Correlation Analysis:** Assessing relationships between economic indicators and GDP.
+-   **Regression Analysis:** Analyzing the predictive power of foreign investments and remittance flows on economic growth.
+-   **Comparative Analysis:** Comparing Armenia’s economic variables with key partner countries.
+-   **Time Series Analysis:** Examining the trends and patterns in Armenia's economic indicators over time, such as GDP growth, trade volumes, remittance flows, and foreign investment. This method helps identify long-term changes and cyclical patterns.
+-   **Factor Analysis:** Identifying the underlying factors that influence Armenia's economic performance by reducing the dimensionality of a large dataset of variables into a smaller set of factors.
+
+Data sources include the Statistical Committee of Armenia and the Central Bank of Armenia.
+Variables analyzed include foreign investments, external trade, dollarization, remittance flows, and industry performance.
+
+# Tourism
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(networkD3)
+library(openxlsx)
+library(ggthemes)
+library(gridExtra)
+library(readxl)
+library(stringr)
+library(textTinyR)
+
+```
+
+![](images/Number of Inbound and Outbound Visitors-01.png)The stacked bar chart illustrates Armenia's inbound and outbound tourism trends from early 2020 through mid-2024.
+In early 2020, both inbound and outbound tourism experienced a significant decline due to the COVID-19 pandemic, with numbers dropping to zero in the second quarter.
+A gradual recovery began in 2021, with a notable increase in tourism activity by the third quarter.
+This upward trend continued, peaking in the third quarter of 2023, before stabilizing by the second quarter of 2024.
+This growth in Armenia's tourism sector can be described by several factors.
+The country's GDP grew by 8.7% in 2023, providing a stable environment that boosted both inbound and outbound tourism (Caucasus Watch, 2023).
+Additionally, the Russia-Ukraine conflict led to an influx of Russian tourists seeking alternative destinations, thereby increasing Armenia's inbound tourism (Time, 2024).
+Improvements in tourism infrastructure, such as an increase in the number of hotels, further supported the sector's growth (EVN Report, 2022).
+From the perspective of international economic partnerships, the growth in inbound tourism, especially from regions like Russia and Europe, reflects intensified connections with Armenia's global partners.
+The increase in outbound tourism suggests that Armenian citizens are accessing more opportunities to engage with international destinations, potentially as a result of diversified partnerships and trade agreements that facilitate travel.
+These trends emphasize the role of Armenia’s international partnerships in influencing tourism dynamics between 2020 and 2024.
+
+This upward trend in tourism also mirrors the rise in foreign direct investments and other financial indicators that contribute to Armenia’s growing integration into the global economy.
+
+# Dollarization
+
+![](images/Dollarization-02.png)
+
+The plot illustrates the trends in Armenia's dollarization levels across various financial indicators from 2020 to 2024, showcasing a general decline in reliance on foreign currencies, particularly the U.S. dollar.
+Each metric—FX Demand Deposits to Total Demand Deposits, FX Deposits to Money Supply, FX Deposits to Total Deposits, FX Loans to Total Loans, and FX Time Deposits to Total Time Deposits—demonstrates a consistent downward trend, reflecting a gradual dedollarization process.
+Notably, the share of foreign currency loans (FX Loans to Total Loans) dropped sharply between 2022 and 2023, while other indicators, such as FX Deposits to Money Supply and FX Time Deposits to Total Time Deposits, declined steadily throughout the period.
+This overall reduction suggests improved confidence in the Armenian dram, supported by factors such as economic adjustments, evolving market dynamics, and potential policy measures aimed at enhancing domestic currency stability amidst ongoing geopolitical and economic challenges.
+
+The decline in dollarization can be attributed to the growing stability in Armenia's financial markets, enhanced by its international trade agreements and partnerships, which have created a more favorable environment for domestic currency use.
+
+![](images/Dollarization sankey-01.png)
+
+This Sankey plot visually represents the flow and changes in dollarization indicators in Armenia from 2020 to 2024.
+On the left side, the years (2020–2024) are displayed, while the right side lists key dollarization metrics.
+The thickness of the flows between the years and metrics indicates the proportion of each metric, highlighting trends over time.
+
+The metric FX Demand Deposits to Total Demand Deposits reflects the ratio of foreign currency (FX) demand deposits to total demand deposits, with higher proportions signaling a stronger preference for holding FX in liquid accounts, often due to economic uncertainty or inflation concerns.
+FX Deposits to Money Supply measures the share of FX deposits relative to the total money supply, where higher values suggest significant reliance on foreign currencies within the broader economy.
+FX Deposits to Total Deposits represents the share of FX deposits among all bank deposits, indicating the extent of dollarization in savings and term accounts.
+FX Loans to Total Loans shows the proportion of loans issued in FX relative to total loans, reflecting borrowers' reliance on FX loans, often linked to trade or inflation hedging.
+Finally, FX Time Deposits to Total Time Deposits highlights the share of long-term deposits held in foreign currency, showcasing trust in FX stability for long-term savings.
+This plot effectively visualizes Armenia's evolving reliance on foreign currency across these indicators.
+
+# Turnover Volume![](images/Turnover value totalbuysell-01.png)
+
+![](images/Repoagreements-01.png)
+
+The time series analysis of Armenia’s financial market activities, shown through total buy/sell turnover and repo agreements turnover from 2019 to 2024, highlights significant growth in the financial sector.
+The total buy/sell turnover, which shows the value of securities and assets traded, increased dramatically, especially after mid-2022.
+It peaked at about 3,679,000 million AMD in February 2024, compared to just 51,000 million AMD in January 2019.
+This sharp rise suggests higher market activity, likely due to improved investor confidence, better trading systems, and positive economic conditions.
+The growth also points to more involvement from both large institutions and individual investors.
+Similarly, repo agreements turnover, which measures short-term borrowing using securities as collateral, steadily increased.
+It started at around 270,000 million AMD in January 2019 and reached about 1,253,000 million AMD in July 2024.
+This rise shows that repo agreements are being used more often for managing liquidity, indicating that Armenia’s financial sector is becoming more advanced as banks and investment firms improve their short-term funding strategies.
+The rapid increase in financial activities can be linked to several economic and institutional factors.
+These include improvements in financial technologies, such as automated trading systems, financial regulation changes, and new financial products.
+Additionally, geopolitical changes and opportunities in regional markets likely attracted foreign investors, further boosting growth.
+This period highlights how Armenia’s financial sector has developed, with both local and international influences driving greater efficiency and activity in its financial markets.
+
+The spike in turnover volume, particularly from mid-2022, reflects the growing investor confidence, driven by the diversification of Armenia’s international relationships and a surge in financial transactions from both local and international investors.
+
+# Balance of Payments
+
+![](images/Balance of payments-01.png)
+
+This bar chart illustrates Armenia's debt trends and financial flows from 2020 to 2023, broken down into four key categories: Capital Account, Current Account, Financial Account, and Reserve Assets.
+The Capital Account in Armenia shows a surplus in 2020 and 2022, reflecting substantial foreign aid and grants provided during crises like the Nagorno-Karabakh conflict (2020) and the COVID-19 pandemic.
+This influx of financial support was crucial for rebuilding efforts, infrastructure projects, and recovery programs.
+However, by 2023, a slight deficit was recorded, which indicates that Armenia might have been repaying foreign-funded projects and aid from previous years.
+
+The Current Account has seen a steady increase in its surplus from 40.4 billion USD in 2020 to 148.5 billion USD in 2023.
+This surge can largely be attributed to growing remittances from the Armenian diaspora, increased exports—especially agricultural products—and the resurgence of tourism post-COVID.
+However, the increase in surplus also reflects higher imports due to rising domestic demand following the pandemic's economic recovery.
+The migration of Russians into Armenia, fleeing the war in Ukraine, likely contributed to a boost in remittances and increased demand for goods and services.
+
+The Financial Account recorded a deficit in 2020, which can be attributed to reduced foreign investments during the political and economic instability caused by the conflict and the pandemic.
+By 2022, however, the financial account shifted to a large surplus, suggesting substantial inflows of foreign direct investments (FDIs) and international loans, likely driven by post-crisis recovery efforts and a more stable political environment.
+In 2023, the surplus decreased, reflecting a slowdown in foreign investment and the potential repayment of earlier debts.
+
+Regarding Reserve Assets, Armenia's reserves grew significantly from 2020 to 2022, peaking at 12.98 billion USD, likely due to IMF support and the appreciation of gold prices.
+However, a noticeable decline in 2023 suggests that reserves were being drawn down to stabilize the Armenian dram, manage rising imports, and service foreign debts.
+The situation may also reflect Armenia’s increased efforts to balance the domestic economy in light of its growing foreign liabilities.
+
+Remittances from Armenia's key partners, notably Russia, are central to maintaining economic stability, reflecting how external economic relations help cushion trade imbalances and enhance Armenia’s balance of payments position.
+
+# Gross External
+
+![](images/Gross External Debt-02.png)
+
+The plot illustrates Armenia's gross external debt by type from 2020 to 2024, highlighting contributions from five categories: Central Bank, Deposit-taking Corporations, Direct Investment, General Government, and Other Sectors.
+Direct Investment consistently represents the largest share, reflecting sustained foreign capital inflows, while General Government debt has grown steadily due to borrowing for infrastructure, defense, and crisis management, particularly during the COVID-19 pandemic and the 2020 Nagorno-Karabakh conflict.
+The relatively stable contributions from Deposit-taking Corporations and Other Sectors demonstrate consistent borrowing by financial institutions and private enterprises.
+Despite rising debt levels, Armenia's economic strategies, including engagement with international organizations like the IMF and structural fiscal reforms in 2023-2024, indicate that external debt is being strategically managed to support recovery and long-term development.
+
+The surge in foreign investments from 2022 onward is consistent with the reduction in dollarization, as international investors are increasingly confident in Armenia’s economic stability, bolstered by favorable international trade agreements.
+
+![](images/Sankey, Gross External Debt-01.png)
+
+The Sankey diagram provides a detailed visualization of Armenia’s external debt structure, illustrating the flow of debt across sectors and financial instruments.
+On the left side, the sources of debt are categorized into Deposit-taking Corporations, General Government, Central Bank, Other Sectors, and Direct Investment, while the right side represents the allocation of this debt across financial instruments.
+Deposit-taking Corporations largely allocate funds to Currency and Deposits and Debt Securities, reflecting their role in liquidity and market-based funding.
+General Government debt is primarily channeled into Loans, signifying reliance on external borrowing from international organizations, with a smaller share in Debt Securities for diversification.
+The Central Bank mainly allocates debt to Currency and Deposits, supporting monetary operations, while Special Drawing Rights (SDRs) represent IMF funding.
+Other Sectors utilize debt for Trade Credits and Advances and Loans, aiding private business operations.
+Direct Investment highlights intercompany loans and connections with multinational entities.
+This diagram demonstrates the diverse composition of Armenia’s external debt and the varying roles of its sectors, with a dominant reliance on loans and debt securities.
+It also highlights Armenia’s integration into international financial networks and strategic management of external liabilities to support economic and fiscal priorities.
+
+\newpage
+
+# Foreign Investments
+
+```{r, warning=FALSE, message= FALSE}
+source("../R/functions/foreign-investments-functions.R")
+# Load cleaned datasets
+foreign_data1 <- readxl::read_excel("../data/processed/CLEANED-FOREIGN-INVESTMENTS.xlsx", sheet = 1)
+```
+
+```{r, fig.width=8, fig.height=8, dpi=500, warning=FALSE, message=FALSE}
+# Generate and display the bar plot
+selected_year <- "2023" # Can also be 2020, 2021, 2022
+selected_metric <- "Total" # Can also be Direct
+top_n <- 50
+create_bar_plot(foreign_data1, selected_year, selected_metric, top_n)
+```
+
+The visualization of Armenia's foreign investments in 2023 shows a clear divide between positive foreign direct investment (FDI) flows (blue) and negative flows or withdrawals (red).
+The United Arab Emirates emerges as the largest contributor to Armenia's foreign investments, reflecting its strong financial system and growing economic ties with Armenia.
+Luxembourg, Canada, France, and Switzerland also play significant roles in driving FDI inflows, showcasing confidence in Armenia's economic policies and reforms.
+These countries likely see Armenia as a stable partner due to its strategic geographic location and emerging market potential.
+On the other hand, notable withdrawals are seen from countries such as Singapore, Netherlands, and Russia, which may indicate reallocation of resources, market realignment, or economic uncertainties affecting those regions' investments in Armenia.
+
+![](images/Global Contributions-02.png)
+
+The map of global contributions to Armenia's direct investments in 2023 shows notable patterns of foreign direct investment (FDI).
+The United Arab Emirates (UAE) emerges as the largest contributor, reflecting its position as a major financial hub and increasing Armenian and international investments in its stable and secure economy.
+Russia demonstrates significant contributions, driven by the influx of Russian businesses and capital into Armenia amidst regional economic shifts, making it a key player in Armenia's FDI landscape.
+Western European countries, including France and Germany, display moderate contributions, reflecting long-standing business ties and multinational investments.
+In North America, the United States and Canada make smaller but notable contributions, likely influenced by the Armenian diaspora and strengthening trade relations.
+Additionally, Argentina stands out in South America, showcasing community-led initiatives and growing bilateral cooperation.
+
+These contributions reflect growing international confidence in Armenia's economic reforms and its efforts to attract FDI through favorable policies, infrastructure development, and its strategic role as a link between Europe and Asia.
+Armenia's ability to build strong ties with diverse regions is helping it establish itself as a rising player in the global investment network.
+
+![](images/Global withdrawals-02.png)
+
+The map showing withdrawals of direct investments in 2023, highlights a significant negative flows from several regions in Armenia's foreign investment landscape.
+Key countries with notable withdrawals include China, India, and Iran in Asia, as well as Netherlands, Austria, and Croatia in Europe.
+These negative flows suggest declining investor confidence, shifting priorities, or resource reallocation.
+The dominance of withdrawals from European countries may reflect broader economic uncertainties, changing investment policies, or redirected capital due to shifting priorities.
+In Asia, the geopolitical tensions and regional dynamics, such as Armenia’s strained relations with neighbors and changes in trade policies, may have influenced the outflows.
+
+# Industries
+
+![](images/Top 10 industries-01.png)
+
+The diversification trends in Armenia's top ten industries between 2020 and 2024 reflect significant shifts driven by economic reforms, international partnerships, and infrastructure investments.
+Industries such as manufacturing of beverages and electricity production gained prominence, while previously dominant sectors like electricity, gas, steam, and air conditioning supply declined in relative contribution.
+By 2024, the contributions of various industries converged, indicating improved economic balance and reduced dependency on specific sectors.
+This transformation aligns with Armenia’s strategic growth program for 2021–2026, which targeted manufacturing expansion, higher value-added production, and ICT development.
+The EU’s Resilience and Growth Plan (2024–2027) further accelerated diversification by supporting energy security, business development, and export promotion through €270 million in investments.
+Additionally, infrastructure projects, including the North-South Highway and renewable energy initiatives, enhanced Armenia’s regional connectivity and industrial modernization.
+Collectively, these efforts fostered a resilient,diversified economy better equipped to adapt to global economic changes​.
+
+These diversification trends, driven by both domestic reforms and international support, highlight Armenia's successful shift toward a more balanced economy, reducing its reliance on traditional sectors and paving the way for sustainable growth.
+The EU’s financial contributions and infrastructure advancements complement the country's broader strategy, aligning with the broader economic transformation reflected in the tourism, dollarization, and investment trends discussed earlier.
+
+\newpage
+
+## Results and Discussion
+
+### Diversification of Armenia’s International Economic Partnerships (2020-2024)
+
+The results indicate a clear trend towards diversification in Armenia's international economic partnerships between 2020 and 2024.
+Armenia has expanded its network of economic relations, moving beyond its long-standing partnerships with countries like Russia and the EU.
+Notable expansions include strengthened trade relations with China and Iran, as well as increased focus on regional cooperation with countries in the Middle East and Central Asia.
+This diversification is driven by a combination of economic needs, geopolitical shifts, and strategic efforts to reduce dependence on a limited number of trading partners.
+
+The growth in trade agreements, particularly with non-traditional partners, and Armenia's active participation in multilateral economic initiatives, such as the Eurasian Economic Union (EAEU) and the Comprehensive and Enhanced Partnership Agreement (CEPA) with the EU, further highlights the country's efforts to diversify its economic alliances.
+Moreover, Armenia's growing engagement in sectors like technology, energy, and infrastructure has expanded the scope of its partnerships.
+
+### Intensification of Armenia’s Economic Relations
+
+In addition to diversification, Armenia has also made efforts to intensify its economic relations with existing partners.
+This intensification is reflected in the increased volume of trade, foreign direct investment (FDI) inflows, and the establishment of joint ventures and partnerships.
+Notably, the country has seen an uptick in trade with both Russia and the European Union, with a focus on high-value exports such as mineral products, machinery, and agricultural goods.
+
+Armenia's participation in regional and global economic initiatives, such as the EAEU and the CEPA agreement with the EU, has fostered closer integration with regional and global markets.
+Furthermore, Armenia's foreign policy strategies, including efforts to secure economic stability through partnerships with key global players, have enhanced its economic competitiveness.
+
+### Role of Citizens in Shaping Armenia’s Economic Relations
+
+An interesting development in the analysis is the growing involvement of Armenia's citizens in shaping the country's global economic relations.
+In recent years, there has been an increased awareness and understanding of global trade and economic diplomacy, particularly among the younger population.
+The rise of social media and online platforms has allowed citizens to engage in discussions about Armenia’s economic strategies and global partnerships.
+Additionally, public opinion and advocacy groups have exerted influence on government decisions regarding trade agreements and foreign relations.
+
+While Armenia’s economic policies are largely shaped by government institutions, the involvement of civil society and citizen-driven movements has become more pronounced, particularly in areas such as labor rights, environmental concerns, and fair trade practices.
+The active role of citizens in advocating for more sustainable and diversified economic partnerships reflects a shift towards a more participatory approach to foreign economic relations.
+
+## Conclusion
+
+### Hypothesis 1: To what extent have Armenia’s international economic partnerships diversified and intensified between 2020 and 2024?
+
+Based on the findings, Armenia's international economic partnerships have diversified and intensified between 2020 and 2024.
+Armenia has expanded its partnerships with countries outside of traditional economic spheres, like the EU and China, and has pursued new agreements, especially with countries like Russia and Iran.
+These relationships have been driven by a combination of geopolitical shifts, regional changes, and economic needs.
+
+-   **Accept or Reject:** This hypothesis is **accepted** because the analysis indicates a clear diversification and intensification of Armenia’s international economic partnerships, which aligns with the findings observed in the period between 2020 and 2024.
+
+### Hypothesis 2: Do citizens of Armenia play a significant role in shaping and influencing the country’s global economic relations?
+
+While Armenia’s international economic relations have been influenced by government-level diplomacy, there is evidence suggesting that citizens, particularly through grassroots movements, advocacy, and public opinion, do play an increasing role.
+Citizens have voiced their opinions on key trade agreements and have demanded transparency and involvement in economic decision-making, especially in the context of free trade agreements, foreign investments, and environmental policies.
+
+-   **Accept or Reject:** This hypothesis is **accepted**, but with nuances. Citizens do play a significant role, but their influence is more indirect through advocacy, political participation, and social movements, rather than direct government-level negotiations.
+
+------------------------------------------------------------------------
+
+## Final Assessment
+
+Both hypotheses are **accepted** based on the conclusions drawn from the analysis of Armenia's international relations between 2020 and 2024.
+However, the role of citizens is more indirect compared to the government’s role in shaping these partnerships.
+
+# References
+
+Statistical Committee of the Republic of Armenia.
+(n.d.).
+Statistical Committee of the Republic of Armenia official website.
+Retrieved from <https://armstat.am/en/?nid=12>
+
+Caucasus Watch.
+(2023).
+Armenia’s economy surges with 8.7% GDP growth in 2023.
+Retrieved from <https://caucasuswatch.de/en/news/armenias-economy-surges-with-87-gdp-growth-in-2023.html>
+
+EVN Report.
+(2022).
+The persistent challenges of Armenia’s tourism sector.
+Retrieved from <https://evnreport.com/magazine-issues/the-persistent-challenges-of-armenias-tourism-sector/>
+
+Time.
+(2024).
+In the shadow of war: Armenia tries to make its economy indispensable.
+Retrieved from <https://time.com/7095800/armenia-war-russia-azerbaijan-west-economy-tech-hub/>
